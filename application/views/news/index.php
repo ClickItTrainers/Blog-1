@@ -14,13 +14,8 @@
 
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" id="username" placeholder="Usuario" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" id="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success" value="Login">Iniciar Sesión</button>
+            <a href="#" class="btn btn-success" role="button">Iniciar Sesión</a>
+            <a href="#" class="btn btn-info" role="button">Registro</a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -42,7 +37,7 @@
               <div class="main">
                       <?php echo $news_item['text']; ?>
               </div>
-              <!--<p><a href="<?php echo site_url('news/'.$news_item['slug']); ?>">Ver más...</a></p>-->
+
               <p><a class="btn btn-default" href="<?php echo site_url('news/'.$news_item['slug']); ?>" role="button">Ver mas &raquo;</a></p>
             </div>
       <?php endforeach; ?>

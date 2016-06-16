@@ -11,7 +11,7 @@ class News extends CI_Controller {
         public function index()
         {
                 $data['news'] = $this->news_model->get_news();
-                $data['title'] = '<center><h1>Blog</h1></center>';
+
                 $this->load->view('templates/header', $data);
                 $this->load->view('news/index', $data);
                 $this->load->view('templates/footer');
@@ -45,7 +45,6 @@ class News extends CI_Controller {
 
           $this->form_validation->set_rules('title', 'Title', 'required');
           $this->form_validation->set_rules('text', 'Text', 'required');
-
           if ($this->form_validation->run() === FALSE)
           {
               $this->load->view('templates/header', $data);
@@ -56,12 +55,35 @@ class News extends CI_Controller {
           else
           {
               $this->news_model->set_news();
-
               $this->load->view('news/success');
               $this->load->view('templates/header', $data);;
               $this->load->view('templates/footer');
           }
       }
+
+      public function login()
+      {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['title'] = 'Inicia sesión';
+
+        $this->form_validation->set_rules('user', 'User', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() === FALSE)
+        {
+          $this->load->view ('templates/header', $data);
+          $this->load->view ('news/login');
+          $this->load->view ('templates/footer');
+        }
+        else
+        {
+          $this->load->view('templates/header', $data);;
+          $this->load->view('news/index');
+          $this->load->view('templates/footer');
+        }
+      }
+
+
 
 
 }

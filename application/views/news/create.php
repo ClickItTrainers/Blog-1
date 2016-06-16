@@ -1,4 +1,4 @@
-<h2><?php echo $title; ?></h2>
+<center><h2><?php echo $title; ?></h2>
 
 <?php echo validation_errors(); ?>
 
@@ -14,3 +14,4 @@
     <br /><a href="../news">Regresar</a><br/>
 
 </form>
+</center>
