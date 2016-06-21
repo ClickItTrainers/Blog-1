@@ -7,7 +7,6 @@ class News extends CI_Controller {
                 $this->load->model('news_model');
                 $this->load->helper('url_helper');
         }
-
         public function index()
         {
                 $data['news'] = $this->news_model->get_news();
@@ -30,19 +29,13 @@ class News extends CI_Controller {
                 $this->load->view('templates/header', $data);
                 $this->load->view('news/view', $data);
                 $this->load->view('templates/footer');
-                $route['news/(:any)'] = 'news/view/$1';
-                $route['news'] = 'news';
-                $route['(:any)'] = 'pages/view/$1';
-                $route['default_controller'] = 'pages/view';
-      }
 
+      }
       public function create()
       {
           $this->load->helper('form');
           $this->load->library('form_validation');
-
           $data['title'] = 'Crear una noticia nueva';
-
           $this->form_validation->set_rules('title', 'Title', 'required');
           $this->form_validation->set_rules('text', 'Text', 'required');
           if ($this->form_validation->run() === FALSE)
@@ -50,40 +43,47 @@ class News extends CI_Controller {
               $this->load->view('templates/header', $data);
               $this->load->view('news/create');
               $this->load->view('templates/footer');
-
           }
           else
           {
               $this->news_model->set_news();
-              $this->load->view('news/success');
               $this->load->view('templates/header', $data);;
+              $this->load->view('news/success');
               $this->load->view('templates/footer');
           }
-      }
-
-      public function login()
-      {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $data['title'] = 'Inicia sesión';
-
-        $this->form_validation->set_rules('user', 'User', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        if ($this->form_validation->run() === FALSE)
-        {
-          $this->load->view ('templates/header', $data);
-          $this->load->view ('news/login');
-          $this->load->view ('templates/footer');
         }
-        else
-        {
-          $this->load->view('templates/header', $data);;
-          $this->load->view('news/index');
-          $this->load->view('templates/footer');
-        }
-      }
 
+          public function registro()
+          {
+
+            $this->load->library('form_validation');
+            $this->load-> helper('form');
+            $this->form_validation->set_rules('username'    ,'Username'    ,'required');
+            $this->form_validation->set_rules('password'    ,'Password'        ,'required');
+            $this->form_validation->set_rules('mail'       ,'mail'        ,'required');
+
+            if( $this->form_validation->run() === FALSE)
+                {
+                //error
+                $data['titulo']= "Registro de usuario nuevo";
+                $this->load->view('templates/header',$data);
+                $this->load->view('news/registro');
+                $this->load->view('templates/footer');
+                }
+                else{
+                    //bien
+                    $data = array(
+                    'username' => $this->input->post('username'),
+                    'password' => $this->input->post('password'),
+                    'mail'   => $this->input->post('mail'));
+                    $this->news_model->insertar($data);
+                    //redirigir a inicio de sesion o login
+                    redirect(base_url().'login');            }
+            //validacion en formulario
+          }
+      
 
 
 
 }
+?>
