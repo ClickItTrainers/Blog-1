@@ -53,35 +53,44 @@ class News extends CI_Controller {
           }
         }
 
-          public function registro()
+
+
+
+
+
+
+        public function registro()
+        {
+          $this->load->library('form_validation');
+          $this->load-> helper('form');
+          $this->form_validation->set_rules('username'    ,'Username'    ,'required');
+          $this->form_validation->set_rules('password'    ,'Password'        ,'required');
+          $this->form_validation->set_rules('mail'       ,'mail'        ,'required');
+
+          if( $this->form_validation->run() === FALSE)
           {
-
-            $this->load->library('form_validation');
-            $this->load-> helper('form');
-            $this->form_validation->set_rules('username'    ,'Username'    ,'required');
-            $this->form_validation->set_rules('password'    ,'Password'        ,'required');
-            $this->form_validation->set_rules('mail'       ,'mail'        ,'required');
-
-            if( $this->form_validation->run() === FALSE)
-                {
-                //error
-                $data['titulo']= "Registro de usuario nuevo";
-                $this->load->view('templates/header',$data);
-                $this->load->view('news/registro');
-                $this->load->view('templates/footer');
-                }
-                else{
-                    //bien
-                    $data = array(
-                    'username' => $this->input->post('username'),
-                    'password' => $this->input->post('password'),
-                    'mail'   => $this->input->post('mail'));
-                    $this->news_model->insertar($data);
-                    //redirigir a inicio de sesion o login
-                    redirect(base_url().'login');            }
-            //validacion en formulario
+            //error
+            $data['titulo']= "Registro de usuario nuevo";
+            $this->load->view('templates/header',$data);
+            $this->load->view('news/registro');
+            $this->load->view('templates/footer');
           }
-      
+          else
+          {
+            //bien
+            $data = array(
+            'username' => $this->input->post('username', true),
+            'password' => $this->input->post('password', true),
+            'mail'   => $this->input->post('mail'));
+            $this->news_model->insertar($data);
+            //redirigir a inicio de sesion o login
+            redirect(base_url().'login');
+          }
+        }
+
+
+
+
 
 
 

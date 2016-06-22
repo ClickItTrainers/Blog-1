@@ -33,7 +33,7 @@
         echo  '<a href="../news/registro" class="btn btn-info" role="button">Registro</a>';
       }
       else {
-        echo  '<a href="../login/salir" class="btn btn-info" role="button">Cerrar Sesion</a>   ';
+        echo  '<a href="../login/salir" class="btn btn-danger" role="button">Cerrar Sesion</a>   ';
         echo  '<a href="../news/create" class="btn btn-success" role="button">Crear nota</a>';
       }
   }?>
@@ -61,5 +61,7 @@ else
     echo '</div><div class="alert alert-info">';
     echo '<center><strong>Dejanos tu opinion en la caja de comentarios de abajo!.</strong></center>';
     echo '</div></div>';
+    echo '<center><textarea name="text" style="width: 50%; height: 20%" rows="10"></textarea><br/><br/>';
+    echo '<a href="#" class="btn btn-info" role="button">Enviar</a></center><br>';
   }
 ?>

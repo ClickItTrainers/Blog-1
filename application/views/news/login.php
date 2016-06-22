@@ -1,4 +1,4 @@
-<br><br>
+<br><br><br><br>
    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
    <nav class="navbar navbar-default navbar-fixed-top">
      <div class="container">
@@ -16,6 +16,12 @@
        </div>
        <div id="navbar" class="navbar-collapse collapse">
          <form class="navbar-form navbar-right">
+           <?php
+           if($this->session->userdata('user')!=null)
+           {
+             redirect('news');
+           }
+           ?>
            <a href="news/registro" class="btn btn-info" role="button">Registro</a>
          </form>
        </div><!--/.navbar-collapse -->

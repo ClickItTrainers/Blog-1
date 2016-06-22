@@ -33,7 +33,7 @@
             echo  '<a href="news/registro" class="btn btn-info" role="button">Registro</a>';
           }
           else {
-            echo  '<a href="login/salir" class="btn btn-info" role="button">Cerrar Sesion</a>   ';
+            echo  '<a href="login/salir" class="btn btn-danger" role="button">Cerrar Sesion</a>   ';
             echo  '<a href="news/create" class="btn btn-success" role="button">Crear nota</a>';
           }
       }?>

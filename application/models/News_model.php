@@ -16,7 +16,6 @@
               $query = $this->db->get_where('news', array('slug' => $slug));
               return $query->row_array();
       }
-
       //Crear una noticia nueva
       public function set_news()
       {
@@ -25,17 +24,28 @@
           $slug = url_title($this->input->post('title'), 'dash', TRUE);
 
           $data = array(
-              'title' => $this->input->post('title'),
+              'title' => $this->input->post('title', true),
               'slug' => $slug,
               'autor' => $autor,
-              'text' => $this->input->post('text')
-
+              'text' => $this->input->post('text', true)
           );
           return $this->db->insert('news', $data);
+      }
+
+      public function set_comment()
+      {
+        $this->load->helper('url');
+        $autor = $this->session->userdata('user');
+
+        $data = array(
+          'comment' => $this->input->post('comment', true),
+          'autor' => $autor,
+          'id_comment' => $this->input->post('slug', true)
+        );
       }
 
       public function insertar($data)
       {
          $this->db->insert('users',$data);
-       }
+      }
 }

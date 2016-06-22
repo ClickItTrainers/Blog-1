@@ -21,8 +21,9 @@
       {
         redirect('news/registro');
       }
-      else {
-        echo  '<a href="../login/salir" class="btn btn-info" role="button">Cerrar Sesion</a>   ';
+      else
+      {
+        echo  '<a href="../login/salir" class="btn btn-danger" role="button">Cerrar Sesion</a>   ';
       }
   }?>
   </form>
@@ -33,10 +34,9 @@
 </nav>
 <center><h2><?php echo $title; ?></h2>
 <?php echo validation_errors(); ?>
-<?php echo form_open('news/create'); ?>
+<?php echo form_open('news/create');?>
     <label for="title">Titulo</label><br />
     <input type="input"style="width: 70%" name="title" /><br /><br/>
-
     <label for="text">Texto</label><br />
     <div class="row">
     <textarea name="text" style="width: 70%; height: 40%" rows="10"></textarea><br/><br/>

@@ -17,8 +17,8 @@ class login extends CI_Controller
      public function index()
      {
           //Obtener los valores de los campos de texto
-          $username = $this->input->post("txt_username");
-          $password = $this->input->post("txt_password");
+          $username = $this->input->post("txt_username", true);
+          $password = $this->input->post("txt_password", true);
 
           //Validaciones de formulario
           $this->form_validation->set_rules("txt_username", "Username", "trim|required");
@@ -61,4 +61,4 @@ class login extends CI_Controller
        $this->session->sess_destroy();
        redirect ('news');
      }
-}?>
+}
