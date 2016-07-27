@@ -1,5 +1,5 @@
-
-<nav class="navbar navbar-default navbar-fixed-top">
+<br/><br/><br/>
+<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -14,11 +14,10 @@
             {
               echo '<span class="glyphicon glyphicon glyphicon-fire" aria-hidden="true"></span>';
               echo ' Bienvenido a mi blog</a>';
-
             }
             else {
               echo '<span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>';
-              echo ' Bienvenido '.$this->session->userdata("user");
+              echo ' Bienvenido de nuevo <strong>'.$this->session->userdata("user").'</strong>';
               echo '</a>';
             }
             ?>
@@ -30,7 +29,7 @@
           if($this->session->userdata('user')===null)
           {
             echo  '<a href="login" class="btn btn-success" role="button">Iniciar Sesión</a>   ';
-            echo  '<a href="news/registro" class="btn btn-info" role="button">Registro</a>';
+            echo  '<a href="login/registro" class="btn btn-info" role="button">Registro</a>';
           }
           else {
             echo  '<a href="login/salir" class="btn btn-danger" role="button">Cerrar Sesion</a>   ';
@@ -44,39 +43,58 @@
       </div>
     </nav>
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-image: url(http://st.depositphotos.com/1032463/1373/i/950/depositphotos_13732950-Background-of-old-vintage-newspapers.jpg); background-size: 100%;">
       <div class="container">
-        <h1>Blog de noticias</h1>
-        <p>Las noticias mas recientes las verás solo aqui.</p>
+        <h1><kbd>News!</kbd></h1>
+        <p><kbd>The most recent news.</kbd></p>
       </div>
     </div>
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-      <?php foreach ($news as $news_item):
-        {
-          $mostrar = substr ($news_item['text'], 0, 200);
-          $mostrar2 = substr ($news_item['title'], 0, 20);
-        }?>
-            <div class="col-md-4">
-              <h2><?php echo $mostrar2; ?></h2>
-              <div class="main">
-                      <?php echo $mostrar."[...]"; ?>
-              </div>
 
-              <p><a class="btn btn-default" href="<?php echo site_url('news/'.$news_item['slug']); ?>" role="button">Ver mas &raquo;</a></p>
+
+    <?php foreach ($news as $news_item):
+      {
+        $mostrar = substr ($news_item['text'], 0, 200);
+
+      }?>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12 post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>
+                                    <strong><a href="<?php echo site_url('news/'.$news_item['slug']); ?>" class="post-title"><?php echo $news_item['title']; ?></a></strong></h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 post-header-line">
+                                <span class="glyphicon glyphicon-user"></span> by <a href="#"><?php echo $news_item['autor']?></a> | <span class="glyphicon glyphicon-calendar">
+                                </span> Sept 16th, 2012 |
+                            </div>
+                        </div>
+                        <div class="row post-content">
+
+                            <div class="col-md-12">
+                                <p>
+                                    <?php echo $mostrar."..."; ?>
+                                </p>
+                                <p>
+                                  <p><a class="btn btn-default" href="<?php echo site_url('news/'.$news_item['slug']); ?>" role="button">Ver mas &raquo;</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-      <?php endforeach; ?>
-      </div>
-      <hr>
-    </div> <!-- /container -->
+        </div>
+    </div>
+    <?php endforeach; ?>
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script>window.jQuery || document.write('<script src="<?php echo base_url();?>assets/js/vendor/jquery.min.js"><\/script>')</script>

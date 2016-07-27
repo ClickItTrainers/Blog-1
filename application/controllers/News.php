@@ -6,11 +6,12 @@ class News extends CI_Controller {
                 parent::__construct();
                 $this->load->model('news_model');
                 $this->load->helper('url_helper');
+                $this->load->helper('form');
+                $this->load->library('form_validation');
         }
         public function index()
         {
                 $data['news'] = $this->news_model->get_news();
-
                 $this->load->view('templates/header', $data);
                 $this->load->view('news/index', $data);
                 $this->load->view('templates/footer');
@@ -19,8 +20,9 @@ class News extends CI_Controller {
 
         public function view($slug = NULL)
         {
+                $data['comments'] = $this->news_model->get_comment();
                 $data['news_item'] = $this->news_model->get_news($slug);
-
+                $data['comments_item'] = $this->news_model->get_comment($slug);
                 if (empty($data['news_item']))
                 {
                         show_404();
@@ -29,8 +31,9 @@ class News extends CI_Controller {
                 $this->load->view('templates/header', $data);
                 $this->load->view('news/view', $data);
                 $this->load->view('templates/footer');
-
       }
+
+
       public function create()
       {
           $this->load->helper('form');
@@ -47,52 +50,30 @@ class News extends CI_Controller {
           else
           {
               $this->news_model->set_news();
-              $this->load->view('templates/header', $data);;
+              $this->load->view('templates/header', $data);
               $this->load->view('news/success');
               $this->load->view('templates/footer');
           }
         }
 
-
-
-
-
-
-
-        public function registro()
+        public function comment()
         {
+          $this->load->helper('form');
           $this->load->library('form_validation');
-          $this->load-> helper('form');
-          $this->form_validation->set_rules('username'    ,'Username'    ,'required');
-          $this->form_validation->set_rules('password'    ,'Password'        ,'required');
-          $this->form_validation->set_rules('mail'       ,'mail'        ,'required');
-
-          if( $this->form_validation->run() === FALSE)
+          $this->form_validation->set_rules('comment', 'Comment', 'required');
+          if ($this->form_validation->run() === FALSE)
           {
-            //error
-            $data['titulo']= "Registro de usuario nuevo";
-            $this->load->view('templates/header',$data);
-            $this->load->view('news/registro');
-            $this->load->view('templates/footer');
+              $this->load->view('templates/header');
+              $this->load->view(base_url().'news');
+              $this->load->view('templates/footer');
           }
           else
           {
-            //bien
-            $data = array(
-            'username' => $this->input->post('username', true),
-            'password' => $this->input->post('password', true),
-            'mail'   => $this->input->post('mail'));
-            $this->news_model->insertar($data);
-            //redirigir a inicio de sesion o login
-            redirect(base_url().'login');
+              $this->news_model->set_comment();
+              $this->load->view('templates/header');
+              $this->load->view('news/success');
+              $this->load->view('templates/footer');
           }
         }
-
-
-
-
-
-
-
 }
 ?>

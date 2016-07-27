@@ -30,7 +30,6 @@ class login extends CI_Controller
                $this->load->view('templates/header');
                $this->load->view('news/login');
                $this->load->view('templates/footer');
-
           }
           else
           {
@@ -49,7 +48,7 @@ class login extends CI_Controller
                     }
                     else
                     {
-                         $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Usuario  y contraseña incorrectos!</div>');
+                         $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Usuario  y contraseña incorrectos</div>');
                          redirect('login/index');
                     }
           }
@@ -60,5 +59,36 @@ class login extends CI_Controller
        $this->session->unset_userdata('user');
        $this->session->sess_destroy();
        redirect ('news');
+     }
+
+     public function registro()
+     {
+       $this->load->library('form_validation');
+       $this->load-> helper('form');
+       $this->form_validation->set_rules('username'    ,'Username'    ,'required');
+       $this->form_validation->set_rules('password'    ,'Password'    ,'required');
+       $this->form_validation->set_rules('mail'        ,'mail'         ,'required');
+
+       if( $this->form_validation->run() === FALSE)
+       {
+         //error
+         $data['titulo']= "Registro de usuario nuevo";
+         $this->load->view('templates/header',$data);
+         $this->load->view('news/registro');
+         $this->load->view('templates/footer');
+       }
+       else
+       {
+         //bien
+         //$var = $this->input->post('password', true);
+         //$pass = password_hash($var, PASSWORD_BCRYPT);
+         $data = array(
+         'username' => $this->input->post('username', true),
+         'password' => $this->input->post('password', true),
+         'mail'   => $this->input->post('mail'));
+         $this->Login_model->insertar($data);
+         //redirigir a inicio de sesion o login
+         redirect(base_url().'login');
+       }
      }
 }

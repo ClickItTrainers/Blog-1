@@ -1,5 +1,15 @@
-<br/><br/><br/>
-<nav class="navbar navbar-default navbar-fixed-top">
+
+<script type="text/javascript">
+function validar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla==8) return true;
+    patron =/[<>'']/;
+    te = String.fromCharCode(tecla);
+    return !patron.test(te);
+}
+</script>
+<br/><br/><br/><br/>
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -8,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../news">
+      <a class="navbar-brand" href="<?php echo base_url();?>news">
         <span class="glyphicon glyphicon glyphicon-fire" aria-hidden="true"></span>
         Bienvenido a mi blog</a>
     </div>
@@ -18,7 +28,7 @@
     {
       if($this->session->userdata('user')===null)
       {
-        echo  '<a href="../login" class="btn btn-success" role="button">Iniciar Sesión</a>   ';
+        echo  '<a href="'.base_url().'login" class="btn btn-success" role="button">Iniciar Sesión</a>   ';
       }
       else {
         redirect('news');
@@ -31,38 +41,58 @@
   </div>
 </nav>
 
+<br><br><br>
 
+<center>
 <div class="container">
-<div class="row">
-<div class="col m12">
-<div class="card-panel   green ">
-</div>
-<center>
-<h1>Registro de usuarios</h1>
-</center>
+     <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+          <?php
+          $attributes = array("class" => "form-horizontal", "id" => "loginform", "name" => "loginform");
+          echo form_open(base_url().'login/registro', $attributes); ?>
+          <fieldset>
+               <legend>Registrar nuevo </legend>
+               <div class="form-group">
+               <div class="row colbox">
+               <div class="col-lg-3 col-sm-4">
+                    <label for="username" class="control-label">Usuario</label>
+               </div>
+               <div class="col-lg-7 col-sm-8">
+                    <input class="form-control" id="username" required name="username" placeholder="Usuario" onkeypress="return validar(event)" type="text" value="<?php echo set_value('txt_username'); ?>" />
+               </div>
+               </div>
+               </div>
+               <div class="form-group">
+               <div class="row colbox">
+               <div class="col-lg-3 col-sm-4">
+               <label for="password" class="control-label">Contraseña</label>
+               </div>
+               <div class="col-lg-7 col-sm-8">
+                    <input class="form-control" id="password" required name="password" onkeypress="return validar(event)" placeholder="Contraseña" type="password" value="<?php echo set_value('txt_password'); ?>" />
+               </div>
+               </div>
+               </div>
+               <div class="form-group">
+               <div class="row colbox">
+               <div class="col-lg-3 col-sm-4">
+                    <label for="mail" class="control-label">Email</label>
+               </div>
+               <div class="col-lg-7 col-sm-8">
+                    <input class="form-control" id="mail" required name="mail" placeholder="example@domain.com" onkeypress="return validar(event)" type="email" value="<?php echo set_value('txt_username');?>"/>
+               </div>
+               </div>
+               </div>
+               <div class="form-group">
+               <div class="col-lg-12 col-sm-3 text-center">
+                    <input id="btn_login" name="nbuton"  type="submit" class="btn btn-default" value="Registrar" />
+                    <a href="<?php echo base_url();?>.news" class="btn btn-default">Regresar</a>
+               </div>
+               </div>
+          </fieldset>
+          <?php echo validation_errors(); ?>
+          <?php echo form_close(); ?>
 
-<?php echo form_open(base_url().'news/registro' ); ?><div class="form-group">
- <label for="username">Nombre de usuario</label>
- <input type="text" class="form-control" id="username" required name="username" placeholder="Nombre de usuario">
-</div><div class="form-group">
- <label for="password">Contrase&ntilde;a</label>
- <input type="password" class="form-control" id="password" required name="password" placeholder="Contrase&ntilde;a">
-</div><div class="form-group">
- <label for="email">Correo Electronico</label>
- <input type="email" class="form-control" id="mail" name="mail"  required placeholder="Correo Electronico">
-</div><!--<button type="submit" class="btn btn-default">Registrar</button>-->
+          </div>
+     </div>
+</div>
 <center>
-<button class="btn btn-lg btn-primary btn-success" name="nbuton" type="submit">Registro</button>
-<a href="../news" class="btn btn-lg btn-primary btn-danger" name="back" type="cancel">Regresar</a>
-</center>
-<!--ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd-->
-<div class="row">
-<div class="col-md-12"><?php echo validation_errors(); ?>
-</div>
-</div><!--close mamada-->
-<?php echo form_close(); ?>
-</div>
-</div>
-</div>
-</div>
-</div>
