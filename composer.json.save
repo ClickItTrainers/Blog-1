@@ -12,12 +12,17 @@
 	},
 	"require": {
 		"php": ">=5.2.4",
-		"mailgun/mailgun-php": "~2.0"
+		"mailgun/mailgun-php": "~2.0",
+php: ^5.5|^7.0
+
 	},
+php-http/httplug: ^1.0
 	"suggest": {
+php-http/multipart-stream-builder: ^0.1
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
+php-http/message: ^1.0
 	},
-	"require-dev": {
+php-http/discovery: ^1.0	"require-dev": {
 		"mikey179/vfsStream": "1.1.*"
 	}
 }

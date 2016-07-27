@@ -58,6 +58,7 @@ class News extends CI_Controller {
 
         public function comment()
         {
+          $this->load->library('email');
           $this->load->helper('form');
           $this->load->library('form_validation');
           $this->form_validation->set_rules('comment', 'Comment', 'required');

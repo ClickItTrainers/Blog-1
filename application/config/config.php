@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://www.mena.com/';
+$config['base_url'] = 'http://preview.dsmb06hk2zxmkj4i07wnkwjim1fez5mivk78yejw4l6m9529.box.codeanywhere.com/';
 
 /*
 |--------------------------------------------------------------------------
