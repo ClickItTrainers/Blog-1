@@ -1,4 +1,4 @@
-<?php include_once './vendor/autoload.php';?>
+
 <br/><br/><br/>
 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">

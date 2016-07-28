@@ -1,4 +1,4 @@
-<?php
+<?php  
 class News extends CI_Controller {
 
         public function __construct()
@@ -58,10 +58,11 @@ class News extends CI_Controller {
 
         public function comment()
         {
-          $this->load->library('email');
+               
           $this->load->helper('form');
           $this->load->library('form_validation');
-          $this->form_validation->set_rules('comment', 'Comment', 'required');
+          $this->form_validation->set_rules('comment', 'Comment', 'required');      
+          $user = $this->session->userdata('user');
           if ($this->form_validation->run() === FALSE)
           {
               $this->load->view('templates/header');
@@ -70,6 +71,7 @@ class News extends CI_Controller {
           }
           else
           {
+              $this->my_mailgun->send($user, 'menagrunge@gmail.com');
               $this->news_model->set_comment();
               $this->load->view('templates/header');
               $this->load->view('news/success');

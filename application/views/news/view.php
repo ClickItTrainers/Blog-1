@@ -89,9 +89,8 @@
             echo '</div></div>';
             echo '<center><textarea name="comment" required style="resize: none; width: 80%;height:20%;" rows="10"></textarea><br/><br/>';
             echo '<input type="submit" class="btn btn-success" name="submit" value="Enviar"></center><br>';
-
-
-        }?>
+				}
+?>
 <center><h2>Comentarios <span class="glyphicon glyphicon-comment"></span></h2></center>
 <?php foreach ($comments as $comments_item):
 
