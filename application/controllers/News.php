@@ -63,6 +63,7 @@ class News extends CI_Controller {
           $this->load->library('form_validation');
           $this->form_validation->set_rules('comment', 'Comment', 'required');      
           $user = $this->session->userdata('user');
+          $email = $this->news_model->get_email($user);
           if ($this->form_validation->run() === FALSE)
           {
               $this->load->view('templates/header');
@@ -71,7 +72,7 @@ class News extends CI_Controller {
           }
           else
           {
-              $this->my_mailgun->send($user, 'menagrunge@gmail.com');
+              $this->my_mailgun->send($user, $email);
               $this->news_model->set_comment();
               $this->load->view('templates/header');
               $this->load->view('news/success');

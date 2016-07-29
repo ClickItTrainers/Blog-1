@@ -90,5 +90,5 @@ class login extends CI_Controller
          //redirigir a inicio de sesion o login
          redirect(base_url().'login');
        }
-     }
+     }    
 }

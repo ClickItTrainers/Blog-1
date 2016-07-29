@@ -3,6 +3,7 @@
       public function __construct()
       {
             $this->load->database();
+        
       }
       //Mostrar todas las noticias en la pantalla principal
       public function get_news($slug = FALSE)
@@ -56,5 +57,12 @@
               }
               $query = $this->db->get_where('comments', array('slug' => $slug));
               return $query->row_array();
+      }
+    
+          function get_email($usr)
+      {
+          $this->db->select('mail')->from('users')->where('username', $usr);
+          $query = $this->db->get();
+          return $query;
       }
 }
